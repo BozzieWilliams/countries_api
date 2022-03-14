@@ -1,38 +1,105 @@
 .App {
-  text-align: center;
+	background-color: hsl(207, 26%, 17%);
+	min-height: 100vh;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.page-numbering {
+	width: 100%;
+	background-color: hsl(207, 26%, 17%);
+	display: flex;
+	justify-content: center;
+	padding-top: 1.5vh;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+	background-color: hsl(207, 26%, 17%);
+	display: flex;
+	flex-direction: column;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.input-container,
+.title-container {
+	padding: 1vh 6vh;
+	color: aliceblue;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
 }
-
-.App-link {
-  color: #61dafb;
+.search {
+	width: 30vw;
+	background-color: hsl(209, 23%, 22%);
+	display: flex;
+	justify-content: flex-start;
+	align-items: baseline;
+	align-content: baseline;
+	border-radius: 1vh;
+	margin-top: 1vh;
+	height: 6vh;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+select {
+	border: none;
+	outline: none;
+	background-color: hsl(209, 23%, 22%);
+	color: white;
+	padding: 0.8vh;
+}
+select:focus {
+	border: none !important;
+	outline: none !important;
+}
+/* option {
+} */
+.search > input {
+	background-color: hsl(209, 23%, 22%);
+	height: 100%;
+	flex-grow: 1;
+	border: none;
+	outline: none;
+	color: hsl(200, 1%, 55%);
+	font-weight: 600;
+}
+.title-container {
+	background-color: hsl(209, 23%, 22%);
+}
+.country-main {
+	padding: 0 5vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+ul {
+	list-style: none;
+	font-size: 2vh;
+	padding: 2vh 0;
+	font-weight: 600;
+}
+li {
+	padding-left: 2.5vh;
+}
+span {
+	color: hsl(0, 4%, 73%);
+	padding-left: 0.5vh;
+}
+.country-container {
+	background-color: hsl(209, 23%, 22%);
+	width: 20vw;
+	height: 45vh;
+	justify-content: baseline;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	margin: 20px 10px 10px 10px;
+	border-radius: 0.5vh;
+	overflow: hidden;
+}
+p {
+	position: relative;
+	font-size: 2.8vh;
+	font-weight: 800;
+	padding: 0 1vh 0 2.5vh;
+}
+.flag {
+	height: 20vh;
+	object-fit: cover;
+	margin-bottom: 20px;
 }
