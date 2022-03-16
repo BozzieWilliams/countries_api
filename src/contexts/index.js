@@ -10,11 +10,13 @@ export default function CountryProvider({ children }) {
 	const [loading, setLoading] = useState(false);
 	const [countrySearch, setCountrySearch] = useState("");
 	const [countryFilter, setCountryFilter] = useState("");
+	const [darkTheme, setDarkTheme] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [countriesPerPage] = useState(12);
 	const handleSearch = (e) => setCountrySearch(e.target.value);
 	const handleFilter = (e) => setCountryFilter(e.target.value);
-	const filteredData = countriesData.filter((country) => {
+	const switchTheme = () => setDarkTheme(!darkTheme);
+	const filteredData = countriesData?.filter((country) => {
 		const { name, region } = country;
 		if (
 			name.toLowerCase().indexOf(countrySearch.toLowerCase()) >= 0 &&
@@ -31,6 +33,7 @@ export default function CountryProvider({ children }) {
 	);
 	// Change page
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 	useEffect(() => {
 		async function fetchData() {
 			setLoading(true);
@@ -40,7 +43,7 @@ export default function CountryProvider({ children }) {
 			return request;
 		}
 		fetchData();
-	}, [countryFilter, countrySearch]);
+	}, []);
 	const appData = {
 		countriesData,
 		loading,
@@ -52,6 +55,8 @@ export default function CountryProvider({ children }) {
 		handleFilter,
 		countryFilter,
 		filteredData,
+		switchTheme,
+		darkTheme,
 	};
 	return (
 		<CountryContext.Provider value={appData}>

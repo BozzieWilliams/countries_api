@@ -1,15 +1,23 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CountriesCards, Header, CountryDetails } from "./components";
 import "./App.css";
-import CountriesCards from "./components/CountriesCards";
-import Pagination from "./components/Pagination";
-import Header from "./components/Header";
+import { UseCountryContext } from "./contexts";
 
 function App() {
+	const { darkTheme } = UseCountryContext();
 	return (
-		<div className='App'>
-			<Header />
-			<CountriesCards />
-			<Pagination />
-		</div>
+		<Router>
+			<div className={darkTheme ? "App" : "app-light"}>
+				<Header />
+				<Routes>
+					<Route index element={<CountriesCards />} path='/' />
+					<Route
+						element={<CountryDetails />}
+						path='country-detail/:cuntryName'
+					/>
+				</Routes>
+			</div>
+		</Router>
 	);
 }
 

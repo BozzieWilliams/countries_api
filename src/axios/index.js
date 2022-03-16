@@ -1,7 +1,5 @@
 import axios from "axios";
 const instance = axios.create({
-	baseURL: "./localData.json",
+	baseURL: "https://restcountries.com/v2/all",
 });
 export default instance;
-
-// https://restcountries.com/v2/all
