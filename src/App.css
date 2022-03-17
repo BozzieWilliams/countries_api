@@ -11,6 +11,12 @@
 .app-light > .input-container {
 	background-color: hsl(0, 0%, 100%);
 }
+.country-details-card-light {
+	background-color: hsl(0, 0%, 100%);
+}
+.country-details-card-light li {
+	color: hsl(207, 26%, 17%);
+}
 .app-light p {
 	color: hsl(207, 26%, 17%);
 }
@@ -33,9 +39,45 @@
 .header-light {
 	background-color: hsl(0, 0%, 98%);
 }
-.header-light > .title-container {
-	background-color: hsl(0, 0%, 98%);
-	border-bottom: hsl(0, 0%, 52%);
+.header-light .title-container {
+	background-color: white;
+}
+.header-light .search {
+	background-color: white;
+	color: hsl(209, 23%, 22%);
+}
+.app-light .back-btn-container-contents {
+	background-color: white;
+	color: hsl(209, 23%, 22%);
+}
+.app-light .back-btn-container-contents span {
+	color: hsl(209, 23%, 22%);
+}
+.app-light .country-details-container h2 {
+	color: hsl(209, 23%, 22%);
+}
+.app-light .country-details-container p {
+	color: hsl(209, 23%, 22%);
+}
+.app-light .neighbours p {
+	color: hsl(209, 23%, 22%);
+}
+.app-light .neighbours p span {
+	background-color: white;
+	color: hsl(209, 23%, 22%);
+	border: 1.5px solid hsl(180, 1%, 58%);
+}
+.header-light .search input {
+	background-color: white;
+	color: hsl(209, 23%, 22%);
+}
+.header-light select {
+	border: none;
+	outline: none;
+	background-color: white;
+	color: hsl(209, 23%, 22%);
+	padding: 0.8vh;
+	margin-left: 1vh;
 }
 .loading-div {
 	display: flex;
@@ -110,8 +152,6 @@ select:focus {
 	margin-top: 2vh;
 }
 .toggle svg {
-	/* text-align: center; */
-	/* padding-top: 2vh; */
 	display: flex;
 	justify-content: center;
 	margin-right: 0;
@@ -166,6 +206,7 @@ select:focus {
 		padding: 0.8vh;
 		margin-left: 1vh;
 	}
+
 	.country-main {
 		padding: 0 5vh;
 		display: flex;
@@ -178,6 +219,7 @@ select:focus {
 		min-width: 100%;
 		min-height: 40vh;
 		margin: 0 10vh;
+		padding-bottom: 2vh;
 	}
 	.page-numbering {
 		overflow-x: scroll;
@@ -200,6 +242,10 @@ li {
 span {
 	color: hsl(0, 4%, 73%);
 	padding-left: 0.5vh;
+}
+.header-light-theme {
+	border-bottom: 2px hsl(0, 4%, 73%);
+	box-shadow: 0 0 2px hsl(0, 1%, 25%) 0;
 }
 .country-container {
 	background-color: hsl(209, 23%, 22%);
@@ -306,9 +352,27 @@ p {
 	display: flex;
 	flex-direction: column;
 }
+.neighbours p span {
+	cursor: pointer;
+}
+.neighbours p:nth-child(2) {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 @media screen and (max-width: 960px) {
+	.title-container p {
+		font-size: 2vh;
+	}
+	.title-container .toggle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.toggle p {
+		margin-top: 1.5vh;
+	}
 	.country-details-styles-container {
-		/* padding: 2vh 5vh 5vh 5vh; */
 		display: flex;
 		flex-direction: column;
 		width: 100%;

@@ -21,7 +21,7 @@ function Header() {
 	}
 	const regions = [...regionValues, { id: 1, value: "cleanUp" }];
 	return (
-		<div className={darkTheme?'header':'header header-light'}>
+		<div className={darkTheme ? "header" : "header header-light"}>
 			<div className='title-container'>
 				<p>Where in the world?</p>
 				<div onClick={switchTheme} className='toggle'>

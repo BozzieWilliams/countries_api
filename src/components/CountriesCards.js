@@ -1,24 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { UseCountryContext } from "../contexts";
-import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
 import { Pagination } from ".";
+import Loading from "./Loading";
 
 function CountriesCards() {
-	const { loading, currentCountries } = UseCountryContext();
+	const { loading, currentCountries, darkTheme } = UseCountryContext();
 	const navigation = useNavigate();
 	const checkCountry = (page) => {
 		navigation(page);
 	};
-	if (loading)
-		return (
-			<div className='loading-div'>
-				<div>
-					<Hypnosis color='#FFFF' width='100px' height='100px' duration='3s' />
-				</div>
-				<h1 style={{ margin: "1vh 0.5vh" }}>Loading...</h1>
-			</div>
-		);
+	if (loading) return <Loading />;
 	if (currentCountries.length < 1) {
 		return (
 			<div className='unavailable-data'>
@@ -34,12 +26,19 @@ function CountriesCards() {
 						country;
 					return (
 						<div
-							onClick={() => checkCountry(`/country-detail/${name}`)}
+							onClick={() => checkCountry(`/country-detail/${alpha3Code}`)}
 							className='country-container'
 							key={alpha3Code}
+							style={{ background: darkTheme ? "hsl(209, 23%, 22%)" : "white" }}
 						>
 							<img className='flag' src={flags.png} alt='' />
-							<div className='country-details-card'>
+							<div
+								className={
+									darkTheme
+										? "country-details-card"
+										: "country-details-card country-details-card-light"
+								}
+							>
 								<p>{name}</p>
 								<div>
 									<ul>

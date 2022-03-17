@@ -13,7 +13,7 @@ function App() {
 					<Route index element={<CountriesCards />} path='/' />
 					<Route
 						element={<CountryDetails />}
-						path='country-detail/:cuntryName'
+						path='country-detail/:cuntryCode'
 					/>
 				</Routes>
 			</div>

@@ -2,25 +2,20 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { UseCountryContext } from "../contexts";
 import { BiArrowBack } from "react-icons/bi";
-import Hypnosis from "react-cssfx-loading/lib/Hypnosis";
+import Loading from "./Loading";
 
 function CountryDetails() {
 	const currentCountry = useParams();
-	const { currentCountries, darkTheme } = UseCountryContext();
+	const { currentCountries, darkTheme, getNeighbour } = UseCountryContext();
 	const navigation = useNavigate();
+	const checkCountry = (page) => {
+		navigation(page);
+	};
 	const activeCountry = currentCountries?.find(
-		(country) => country?.name === currentCountry.cuntryName
+		(country) => country?.alpha3Code === currentCountry?.cuntryCode
 	);
 
-	if (!activeCountry)
-		return (
-			<div className='loading-div'>
-				<div>
-					<Hypnosis color='#FFFF' width='100px' height='100px' duration='3s' />
-				</div>
-				<h1 style={{ margin: "1vh 0.5vh" }}>Loading...</h1>
-			</div>
-		);
+	if (!activeCountry) return <Loading />;
 
 	const {
 		name,
@@ -35,9 +30,26 @@ function CountryDetails() {
 		flags,
 		borders,
 	} = activeCountry;
-
+	const neigbours = [];
+	function addNeighbours() {
+		if (activeCountry) {
+			const countries = borders?.slice(0, 3);
+			if (countries?.length > 0) {
+				for (let item of countries) {
+					neigbours.push(getNeighbour(item));
+				}
+			} else {
+				console.log("");
+			}
+		}
+	}
+	if (activeCountry) {
+		addNeighbours();
+	}
 	return (
-		<div className={darkTheme ?'country-details':'country-details app-light'}>
+		<div
+			className={darkTheme ? "country-details" : "country-details app-light"}
+		>
 			<div className='back-btn-container'>
 				<div
 					onClick={() => navigation("/")}
@@ -51,7 +63,7 @@ function CountryDetails() {
 				<div className='country-details-image-container'>
 					<img src={flags.png} alt='country-flag' />
 				</div>
-				<div className='country-details-container'>
+				<div className='country-details-container '>
 					<h2>{name}</h2>
 					<div className='contry-detail-main'>
 						<div className='country-fragment-detail'>
@@ -74,16 +86,23 @@ function CountryDetails() {
 						</div>
 						<div className='country-fragment-detail additional'>
 							<p>
-								Top Level Domain: <span>{topLevelDomain[0]}</span>
+								Top Level Domain:
+								{topLevelDomain?.slice(0, 1)?.map((domain) => {
+									return <span key={domain}>{domain}</span>;
+								})}
 							</p>
 							<p>
-								Currencies: <span>{currencies[0].name}</span>
+								Currencies: <span>{currencies[0]?.name}</span>
 							</p>
 							<p>
 								Languages:
-								{languages?.map((language) => (
-									<span key={language.iso639_1}>{language.name}</span>
-								))}
+								{languages?.map((language, index) =>
+									index === languages?.length - 1 ? (
+										<span key={language?.iso639_1}>{language?.name}</span>
+									) : (
+										<span key={language?.iso639_1}>{language?.name},</span>
+									)
+								)}
 							</p>
 						</div>
 					</div>
@@ -91,9 +110,15 @@ function CountryDetails() {
 					<div className='country-fragment-detail neighbours'>
 						<p>Border Countries: </p>
 						<p>
-							{borders?.slice(0, 3).map((border, index) => (
-								<span className='border-country' key={border + index}>
-									{border}
+							{neigbours?.map((border, index) => (
+								<span
+									onClick={() =>
+										checkCountry(`/country-detail/${border?.alpha3Code}`)
+									}
+									className='border-country'
+									key={border?.alpha3Code + index}
+								>
+									{border?.name}
 								</span>
 							))}
 						</p>

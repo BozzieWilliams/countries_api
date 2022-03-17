@@ -16,7 +16,8 @@ export default function CountryProvider({ children }) {
 	const handleSearch = (e) => setCountrySearch(e.target.value);
 	const handleFilter = (e) => setCountryFilter(e.target.value);
 	const switchTheme = () => setDarkTheme(!darkTheme);
-	const filteredData = countriesData?.filter((country) => {
+	const localData = [...countriesData];
+	const filteredData = localData?.filter((country) => {
 		const { name, region } = country;
 		if (
 			name.toLowerCase().indexOf(countrySearch.toLowerCase()) >= 0 &&
@@ -24,7 +25,12 @@ export default function CountryProvider({ children }) {
 		)
 			return country;
 	});
-	// Get current countries
+	const getNeighbour = (entry) =>
+		localData?.find((country) => {
+			const { alpha3Code } = country;
+			if (alpha3Code === entry) return country;
+		});
+	// Get current countries for Current Page
 	const indexOfLastCountries = currentPage * countriesPerPage;
 	const indexOfFirstCountries = indexOfLastCountries - countriesPerPage;
 	const currentCountries = filteredData?.slice(
@@ -57,6 +63,7 @@ export default function CountryProvider({ children }) {
 		filteredData,
 		switchTheme,
 		darkTheme,
+		getNeighbour,
 	};
 	return (
 		<CountryContext.Provider value={appData}>
